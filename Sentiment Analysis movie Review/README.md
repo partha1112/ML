@@ -15,12 +15,12 @@ The project splits the concern between training (offline notebook), service logi
 
 ```mermaid
 graph TD
-    subgraph Streamlit Client [Streamlit Frontend (client/app.py)]
+    subgraph Streamlit_Client ["Streamlit Frontend (client/app.py)"]
         A[User Interface] -->|1. Inputs Review Text| B(Analyze Sentiment Button)
         G[Displays Sentiment & Confidence] <--- |6. Render JSON Result| F[API JSON Response]
     end
 
-    subgraph FastAPI Backend [FastAPI Server (controller/classify_controller.py)]
+    subgraph FastAPI_Backend ["FastAPI Server (controller/classify_controller.py)"]
         B -->|2. GET HTTP Request /classify?review=...| C{FastAPI Route}
         C -->|3. Invoke Prediction| D[SentimentAnalyzer Service (service/analyser.py)]
         D -->|4. Text Preprocessing & LSTM Inference| E[Keras model_2.keras & tokenizer.json]
@@ -29,8 +29,8 @@ graph TD
         C -->|HTTP Response| F
     end
 
-    style Streamlit Client fill:#fdf5e6,stroke:#FF4B4B,stroke-width:2px
-    style FastAPI Backend fill:#e6f2ff,stroke:#005571,stroke-width:2px
+    style Streamlit_Client fill:#fdf5e6,stroke:#FF4B4B,stroke-width:2px
+    style FastAPI_Backend fill:#e6f2ff,stroke:#005571,stroke-width:2px
 ```
 
 ---
