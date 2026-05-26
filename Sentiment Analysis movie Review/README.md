@@ -15,15 +15,15 @@ The project splits the concern between training (offline notebook), service logi
 
 ```mermaid
 graph TD
-    subgraph Streamlit_Client ["Streamlit Frontend (client/app.py)"]
-        A[User Interface] -->|1. Inputs Review Text| B(Analyze Sentiment Button)
-        G[Displays Sentiment & Confidence] <--- |6. Render JSON Result| F[API JSON Response]
+    subgraph Streamlit_Client ["Streamlit Frontend - client/app.py"]
+        A["User Interface"] -->|1. Inputs Review Text| B["Analyze Sentiment Button"]
+        G["Displays Sentiment & Confidence"] <---|6. Render JSON Result| F["API JSON Response"]
     end
 
-    subgraph FastAPI_Backend ["FastAPI Server (controller/classify_controller.py)"]
-        B -->|2. GET HTTP Request /classify?review=...| C{FastAPI Route}
-        C -->|3. Invoke Prediction| D[SentimentAnalyzer Service (service/analyser.py)]
-        D -->|4. Text Preprocessing & LSTM Inference| E[Keras model_2.keras & tokenizer.json]
+    subgraph FastAPI_Backend ["FastAPI Server - controller/classify_controller.py"]
+        B -->|2. GET /classify?review=...| C{"FastAPI Route"}
+        C -->|3. Invoke Prediction| D["SentimentAnalyzer Service"]
+        D -->|4. Preprocessing & LSTM Inference| E["Keras Model & Tokenizer"]
         E -->|5. Predict Probability| D
         D -->|Returns Sentiment & Score| C
         C -->|HTTP Response| F
